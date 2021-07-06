@@ -63,7 +63,6 @@ export default handleActions(
       }),
     [ADD]: (state, action) =>
       produce(state, (draft) => {
-        const key = parseInt(action.payload.schedule.query);
         draft.scheduleList.push(action.payload.schedule);
       }),
   },

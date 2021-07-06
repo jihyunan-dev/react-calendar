@@ -37,7 +37,7 @@ const Add = (props) => {
       <form>
         <Input
           id="is-important"
-          label="중요여부"
+          label="중요"
           type="checkbox"
           _onChange={(e) => setIsImportant(e.target.checked)}
         />
