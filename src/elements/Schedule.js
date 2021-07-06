@@ -1,9 +1,13 @@
 import React from "react";
 
 const Schedule = (props) => {
-  const { children } = props;
+  const { _onClick, children } = props;
 
-  return <button>{children}</button>;
+  return (
+    <button type="button" onClick={_onClick}>
+      {children}
+    </button>
+  );
 };
 
 export default Schedule;
