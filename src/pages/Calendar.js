@@ -10,6 +10,7 @@ const Calendar = (props) => {
   return (
     <>
       <CalendarHeader current={current} setDate={setDate} />
+      <CalendarBody current={current} />
     </>
   );
 };
