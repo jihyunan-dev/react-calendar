@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as modalActions } from "../redux/modules/modal";
+import { actionCreators as calendarActions } from "../redux/modules/calendar";
 
 const Modal = (props) => {
   const dispatch = useDispatch();
@@ -11,7 +12,7 @@ const Modal = (props) => {
     state.calendar.scheduleList.find((schedule) => schedule.id === currentId)
   );
 
-  const { title, memo, location, date } = data;
+  const { title, memo, location, date, isCompleted, isImportant, id } = data;
 
   const year = String(date).slice(0, 4);
   const month = String(date).slice(4, 6);
@@ -21,9 +22,16 @@ const Modal = (props) => {
     dispatch(modalActions.closeModal());
   };
 
+  const toggleComplete = () => {
+    dispatch(calendarActions.checkCalendarFB(id));
+  };
+
   return (
     <ModalContainer>
-      {/* 중요 라벨 */}
+      <div>
+        <strong>{isImportant ? "중요" : null}</strong>
+        <span>{isCompleted ? "완료" : "미완료"}</span>
+      </div>
       <dl>
         <div>
           <dt>일정 제목</dt>
@@ -42,7 +50,12 @@ const Modal = (props) => {
           <dd>{memo}</dd>
         </div>
       </dl>
-      <button onClick={closeModal}>닫기</button>
+      <button type="button" onClick={toggleComplete}>
+        {isCompleted ? "미완료" : "완료"}
+      </button>
+      <button type="button" onClick={closeModal}>
+        닫기
+      </button>
     </ModalContainer>
   );
 };

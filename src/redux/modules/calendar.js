@@ -8,7 +8,7 @@ const scheduleDB = firestore.collection("schedules");
 const LOAD = "calendar/LOAD";
 const ADD = "calendar/ADD";
 const TOGGLE_MODE = "calendar/TOGGLE_MODE";
-// const CHECK = "calendar/CHECK";
+const CHECK = "calendar/CHECK";
 // const EDIT = "calendar/EDIT";
 // const DELETE = "calendar/DELETE";
 
@@ -16,7 +16,7 @@ const TOGGLE_MODE = "calendar/TOGGLE_MODE";
 const loadCalendar = createAction(LOAD, (schedules) => ({ schedules }));
 const addCalendar = createAction(ADD, (schedule) => ({ schedule }));
 const toggleMode = createAction(TOGGLE_MODE);
-// const checkCalendar = createAction(CHECK, (id) => ({id}))
+const checkCalendar = createAction(CHECK, (id) => ({ id }));
 // const EditCalendar = createAction(EDIT, (new_schedule, id) => ({
 //   new_schedule,
 //   id,
@@ -41,13 +41,24 @@ const loadCalendarFB = () => (dispatch, getState) => {
 };
 
 const addCalendarFB = (schedule) => (dispatch, getState) => {
-  // 정제해서 firebase에 저장
   scheduleDB
     .add({ ...schedule })
     .then((doc) => {
       const _schedule = { ...schedule, id: doc.id };
       dispatch(addCalendar(_schedule));
     })
+    .catch((err) => console.log(err));
+};
+
+const checkCalendarFB = (id) => (dispatch, getState) => {
+  const data = getState().calendar.scheduleList.find(
+    (schedule) => schedule.id === id
+  );
+
+  scheduleDB
+    .doc(id)
+    .update({ isCompleted: !data.isCompleted })
+    .then((res) => dispatch(checkCalendar(id)))
     .catch((err) => console.log(err));
 };
 
@@ -72,6 +83,14 @@ export default handleActions(
       produce(state, (draft) => {
         draft.mode = draft.mode === "all" ? "completed" : "all";
       }),
+    [CHECK]: (state, action) =>
+      produce(state, (draft) => {
+        draft.scheduleList = draft.scheduleList.map((schedule) =>
+          schedule.id === action.payload.id
+            ? { ...schedule, isCompleted: !schedule.isCompleted }
+            : schedule
+        );
+      }),
   },
   initialState
 );
@@ -80,4 +99,5 @@ export const actionCreators = {
   toggleMode,
   loadCalendarFB,
   addCalendarFB,
+  checkCalendarFB,
 };
