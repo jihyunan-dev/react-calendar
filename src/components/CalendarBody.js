@@ -6,9 +6,8 @@ import Date from "./Date";
 
 const CalendarBody = (props) => {
   const current = useSelector((state) => state.date.current);
-  const thisYear = parseInt(current.format("YYYY"));
-  const schedules =
-    useSelector((state) => state.calendar.scheduleList[thisYear]) || [];
+
+  const schedules = useSelector((state) => state.calendar.scheduleList) || [];
 
   const firstDay = current.clone().startOf("month");
   const startDate = firstDay.clone().subtract("day", firstDay.day());

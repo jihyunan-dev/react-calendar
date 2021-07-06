@@ -26,9 +26,9 @@ const Add = (props) => {
       memo,
       color,
       query: parseInt(date.slice(0, 5)),
-      id: Date.now(), // 임시 id. 나중에는 파이어베이스에서 받아올 것!
+      isCompleted: false,
     };
-    dispatch(calendarActions.addCalendar(schedule));
+    dispatch(calendarActions.addCalendarFB(schedule));
     history.push("/");
   };
 
