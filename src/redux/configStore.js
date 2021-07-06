@@ -3,8 +3,13 @@ import thunk from "redux-thunk";
 
 import Calendar from "./modules/calendar";
 import Date from "./modules/date";
+import Modal from "./modules/modal";
 
-const rootReducer = combineReducers({ calendar: Calendar, date: Date });
+const rootReducer = combineReducers({
+  calendar: Calendar,
+  date: Date,
+  modal: Modal,
+});
 
 const middlewares = [thunk];
 
