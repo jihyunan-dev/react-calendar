@@ -9,6 +9,7 @@ import { actionCreators as calendarActions } from "../redux/modules/calendar";
 const Calendar = (props) => {
   const dispatch = useDispatch();
   const isShow = useSelector((state) => state.modal.modalVisibility);
+  const mode = useSelector((state) => state.calendar.mode);
 
   const clickButton = () => {
     dispatch(calendarActions.toggleMode());
@@ -20,7 +21,7 @@ const Calendar = (props) => {
       <CalendarBody />
       {isShow && <Modal />}
       <button type="button" onClick={clickButton}>
-        완료된 일정 보기
+        {mode === "all" ? "완료된 일정 보기" : "모든 일정 보기"}
       </button>
       <Link to="/add">추가하기</Link>
     </>
