@@ -16,7 +16,11 @@ const Date = (props) => {
       <span>{children}</span>
       {list.map((item) => {
         return (
-          <Schedule key={item.id} _onClick={() => showModal(item.id)}>
+          <Schedule
+            key={item.id}
+            isCompleted={item.isCompleted}
+            _onClick={() => showModal(item.id)}
+          >
             {item.title}
           </Schedule>
         );
