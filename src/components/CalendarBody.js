@@ -5,8 +5,8 @@ import { Flexbox } from "../mixins/flexbox";
 import Date from "./Date";
 
 const CalendarBody = (props) => {
+  const mode = useSelector((state) => state.calendar.mode);
   const current = useSelector((state) => state.date.current);
-
   const schedules = useSelector((state) => state.calendar.scheduleList) || [];
 
   const firstDay = current.clone().startOf("month");
@@ -19,9 +19,17 @@ const CalendarBody = (props) => {
       <>
         {[...Array(42)].map((n, idx) => {
           let target = startDate.clone().add(idx, "d");
-          let targetList = schedules.filter(
-            (schedule) => schedule.date === parseInt(target.format("YYYYMMDD"))
-          );
+          let targetList =
+            mode === "all"
+              ? schedules.filter(
+                  (schedule) =>
+                    schedule.date === parseInt(target.format("YYYYMMDD"))
+                )
+              : schedules.filter(
+                  (schedule) =>
+                    schedule.date === parseInt(target.format("YYYYMMDD")) &&
+                    schedule.isCompleted === true
+                );
           return (
             <Date key={idx} list={targetList}>
               {target.format("D")}

@@ -7,6 +7,7 @@ const scheduleDB = firestore.collection("schedules");
 // action type
 const LOAD = "calendar/LOAD";
 const ADD = "calendar/ADD";
+const TOGGLE_MODE = "calendar/TOGGLE_MODE";
 // const CHECK = "calendar/CHECK";
 // const EDIT = "calendar/EDIT";
 // const DELETE = "calendar/DELETE";
@@ -14,6 +15,7 @@ const ADD = "calendar/ADD";
 // action creator
 const loadCalendar = createAction(LOAD, (schedules) => ({ schedules }));
 const addCalendar = createAction(ADD, (schedule) => ({ schedule }));
+const toggleMode = createAction(TOGGLE_MODE);
 // const checkCalendar = createAction(CHECK, (id) => ({id}))
 // const EditCalendar = createAction(EDIT, (new_schedule, id) => ({
 //   new_schedule,
@@ -52,6 +54,7 @@ const addCalendarFB = (schedule) => (dispatch, getState) => {
 // initialState
 const initialState = {
   scheduleList: [],
+  mode: "all",
 };
 
 // reducer
@@ -65,11 +68,16 @@ export default handleActions(
       produce(state, (draft) => {
         draft.scheduleList.push(action.payload.schedule);
       }),
+    [TOGGLE_MODE]: (state, action) =>
+      produce(state, (draft) => {
+        draft.mode = draft.mode === "all" ? "completed" : "all";
+      }),
   },
   initialState
 );
 
 export const actionCreators = {
+  toggleMode,
   loadCalendarFB,
   addCalendarFB,
 };
