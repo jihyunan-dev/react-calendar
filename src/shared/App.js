@@ -1,6 +1,8 @@
-import Calendar from "../pages/Calendar";
-import { ThemeProvider } from "styled-components";
+import React from "react";
 import GlobalStyles from "./GlobalStyles";
+import { ThemeProvider } from "styled-components";
+
+import Calendar from "../pages/Calendar";
 import theme from "./theme";
 
 function App() {

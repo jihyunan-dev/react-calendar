@@ -1,10 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import { Flexbox } from "../mixins/flexbox";
 import Date from "./Date";
 
 const CalendarBody = (props) => {
-  const { current } = props;
+  const current = useSelector((state) => state.date.current);
 
   const firstDay = current.clone().startOf("month");
   const startDate = firstDay.clone().subtract("day", firstDay.day());

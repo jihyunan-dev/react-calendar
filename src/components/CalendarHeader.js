@@ -1,11 +1,16 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import { actionCreators as dateActions } from "../redux/modules/date";
 
 const CalendarHeader = (props) => {
-  const { current, setDate } = props;
+  const current = useSelector((state) => state.date.current);
+  const dispatch = useDispatch();
 
-  const showLastMonth = () => setDate(current.clone().subtract(1, "month"));
-  const showNextMonth = () => setDate(current.clone().add(1, "month"));
+  const showLastMonth = () =>
+    dispatch(dateActions.setCurrent(current.clone().subtract(1, "month")));
+  const showNextMonth = () =>
+    dispatch(dateActions.setCurrent(current.clone().add(1, "month")));
 
   return (
     <div>
