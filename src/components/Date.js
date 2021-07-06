@@ -1,12 +1,15 @@
 import React from "react";
-import styled from "styled-components";
-import { Grid, Text } from "../elements";
+import { Schedule } from "../elements";
 
 const Date = (props) => {
-  const { children } = props;
+  const { list, children } = props;
+
   return (
     <div>
       <span>{children}</span>
+      {list.map((item) => (
+        <Schedule key={item.id}>{item.title}</Schedule>
+      ))}
     </div>
   );
 };

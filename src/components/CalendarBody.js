@@ -6,6 +6,9 @@ import Date from "./Date";
 
 const CalendarBody = (props) => {
   const current = useSelector((state) => state.date.current);
+  const thisYear = parseInt(current.format("YYYY"));
+  const schedules =
+    useSelector((state) => state.calendar.scheduleList[thisYear]) || [];
 
   const firstDay = current.clone().startOf("month");
   const startDate = firstDay.clone().subtract("day", firstDay.day());
@@ -17,7 +20,14 @@ const CalendarBody = (props) => {
       <>
         {[...Array(42)].map((n, idx) => {
           let target = startDate.clone().add(idx, "d");
-          return <Date key={idx}>{target.format("D")}</Date>;
+          let targetList = schedules.filter(
+            (schedule) => schedule.date === parseInt(target.format("YYYYMMDD"))
+          );
+          return (
+            <Date key={idx} list={targetList}>
+              {target.format("D")}
+            </Date>
+          );
         })}
       </>
     );
