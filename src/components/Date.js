@@ -1,10 +1,11 @@
 import React from "react";
+import styled, { css } from "styled-components";
 import { useDispatch } from "react-redux";
 import { Schedule } from "../elements";
 import { actionCreators as modalActions } from "../redux/modules/modal";
 
 const Date = (props) => {
-  const { list, children } = props;
+  const { list, today, children } = props;
   const dispatch = useDispatch();
 
   const showModal = (id) => {
@@ -12,21 +13,45 @@ const Date = (props) => {
   };
 
   return (
-    <div>
-      <span>{children}</span>
+    <DateBox today={today}>
+      <DateNum today={today}>{children}</DateNum>
       {list.map((item) => {
         return (
           <Schedule
             key={item.id}
             isCompleted={item.isCompleted}
+            color={item.color}
             _onClick={() => showModal(item.id)}
           >
             {item.title}
           </Schedule>
         );
       })}
-    </div>
+    </DateBox>
   );
 };
+
+const DateBox = styled.div`
+  ${({ theme, today }) => {
+    const { colors } = theme;
+    return css`
+      padding: 7px;
+      background-color: ${today === true ? colors.white : colors.black};
+    `;
+  }}
+`;
+
+const DateNum = styled.p`
+  ${({ theme, today }) => {
+    const { colors, fontSizes } = theme;
+    return css`
+      width: 100%;
+      padding-bottom: 5px;
+      font-size: ${fontSizes.sm};
+      font-weight: 600;
+      color: ${today === true ? colors.black : colors.white};
+    `;
+  }}
+`;
 
 export default Date;
