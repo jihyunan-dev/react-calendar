@@ -12,4 +12,7 @@ const FlexBoxColumn = css`
   justify-content: center;
 `;
 
-export { Flexbox, FlexBoxColumn };
+export const flex = {
+  Flexbox,
+  FlexBoxColumn,
+};
