@@ -1,0 +1,55 @@
+import { Link } from "react-router-dom";
+import styled, { css } from "styled-components";
+import { flex } from "../mixins";
+
+// 공통 스타일
+const Btn = css`
+  ${({ theme }) => {
+    const { colors } = theme;
+    return css`
+      ${flex.Flexbox};
+      color: ${colors.black};
+      background-color: ${colors.white};
+      transition: background-color 200ms ease-in-out;
+
+      &:hover {
+        color: ${colors.black};
+        background-color: ${colors.lightGray};
+      }
+    `;
+  }}
+`;
+
+const RectangleBtn = styled.button`
+  ${({ theme }) => {
+    const { fontSizes } = theme;
+    return css`
+      ${Btn};
+      padding: 10px;
+      border-radius: 5px;
+      font-size: ${fontSizes.sm};
+      font-weight: 600;
+    `;
+  }}
+`;
+
+const RoundBtn = styled.button`
+  ${Btn};
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 20px;
+
+  ${({ theme }) => theme.device.tablet} {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+`;
+
+const CancleBtn = styled(Link)`
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  padding: 10px;
+`;
+
+export { RectangleBtn, RoundBtn, CancleBtn };
