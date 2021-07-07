@@ -4,10 +4,15 @@ const device = {
 };
 
 const colors = {
-  white: "#FFFFFF",
+  white: "#F5F5F5",
   black: "#202020",
+  lightGray: "#cccccc",
   red: "#eb2f06",
   blue: "#0652DD",
+};
+
+const borders = {
+  basicBorder: `1px solid ${colors.white}`,
 };
 
 const fontSizes = {
@@ -21,6 +26,7 @@ const fontSizes = {
 const theme = {
   device,
   colors,
+  borders,
   fontSizes,
 };
 

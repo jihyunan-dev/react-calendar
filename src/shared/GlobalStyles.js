@@ -17,7 +17,10 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
+    color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme }) => theme.colors.black};
     font-family: 'EliceDigitalBaeum_Regular', Arial, Helvetica, sans-serif;
+
   }
 
   a {
@@ -39,6 +42,11 @@ const GlobalStyles = createGlobalStyle`
 
   textarea {
     resize: none;
+  }
+
+  button {
+    padding: 0;
+    cursor: pointer;
   }
   
 
