@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import CalendarBody from "../components/CalendarBody";
 import CalendarHeader from "../components/CalendarHeader";
 import Modal from "../components/Modal";
+import { Overlay } from "../elements";
 
 const Calendar = (props) => {
   const isShow = useSelector((state) => state.modal.modalVisibility);
@@ -12,6 +13,7 @@ const Calendar = (props) => {
 
   return (
     <Container>
+      {isShow && <Overlay />}
       <CalendarHeader toAdd={moveToAdd} />
       <CalendarBody />
       {isShow && <Modal />}
