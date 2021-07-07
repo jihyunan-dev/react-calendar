@@ -1,31 +1,26 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { useSelector } from "react-redux";
 import CalendarBody from "../components/CalendarBody";
 import CalendarHeader from "../components/CalendarHeader";
 import Modal from "../components/Modal";
-import { actionCreators as calendarActions } from "../redux/modules/calendar";
 
 const Calendar = (props) => {
-  const dispatch = useDispatch();
   const isShow = useSelector((state) => state.modal.modalVisibility);
-  const mode = useSelector((state) => state.calendar.mode);
 
-  const clickButton = () => {
-    dispatch(calendarActions.toggleMode());
-  };
+  const moveToAdd = () => props.history.push("/add");
 
   return (
-    <>
-      <CalendarHeader />
+    <Container>
+      <CalendarHeader toAdd={moveToAdd} />
       <CalendarBody />
       {isShow && <Modal />}
-      <button type="button" onClick={clickButton}>
-        {mode === "all" ? "완료된 일정 보기" : "모든 일정 보기"}
-      </button>
-      <Link to="/add">추가하기</Link>
-    </>
+    </Container>
   );
 };
+
+const Container = styled.section`
+  position: relative;
+`;
 
 export default Calendar;

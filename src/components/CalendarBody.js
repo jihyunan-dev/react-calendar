@@ -1,10 +1,16 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
-import { Flexbox } from "../mixins/flexbox";
+import { flex } from "../mixins";
 import Date from "./Date";
 
+import { actionCreators as calendarActions } from "../redux/modules/calendar";
+
+import { ModeBtn } from "../elements";
+
 const CalendarBody = (props) => {
+  const dispatch = useDispatch();
+
   const mode = useSelector((state) => state.calendar.mode);
   const { now, current } = useSelector((state) => state.date);
   const nowFormat = now.clone().format("YYYYMMDD");
@@ -14,6 +20,10 @@ const CalendarBody = (props) => {
   const startDate = firstDay.clone().subtract("day", firstDay.day());
 
   const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+
+  const clickButton = () => {
+    dispatch(calendarActions.toggleMode());
+  };
 
   const renderDate = () => {
     return (
@@ -43,16 +53,24 @@ const CalendarBody = (props) => {
   };
 
   return (
-    <div>
+    <Container>
       <CalendarDays>
         {days.map((day, idx) => (
           <DayBox key={idx}>{day}</DayBox>
         ))}
       </CalendarDays>
       <CalendarDate>{renderDate()}</CalendarDate>
-    </div>
+
+      <ModeBtn type="button" onClick={clickButton}>
+        {mode === "all" ? "완료 일정 보기" : "모든 일정 보기"}
+      </ModeBtn>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  position: relative;
+`;
 
 const CalendarGrid = css`
   ${({ theme }) => {
@@ -81,9 +99,9 @@ const CalendarDays = styled.div`
 
 const DayBox = styled.div`
   ${({ theme }) => {
-    const { device, colors, borders, fontSizes } = theme;
+    const { device, fontSizes } = theme;
     return css`
-      ${Flexbox}
+      ${flex.Flexbox}
       height: 30px;
 
       font-size: ${fontSizes.sm};

@@ -3,7 +3,8 @@ import styled, { css } from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { actionCreators as dateActions } from "../redux/modules/date";
-import { Flexbox } from "../mixins/flexbox";
+import { flex, PosCenter } from "../mixins";
+import { FaPlus } from "react-icons/fa";
 
 const CalendarHeader = (props) => {
   const current = useSelector((state) => state.date.current);
@@ -16,15 +17,22 @@ const CalendarHeader = (props) => {
 
   return (
     <Header>
-      <ChevronBtn onClick={showLastMonth}>
-        <BsChevronLeft />
-      </ChevronBtn>
+      <Nav>
+        <HeaderBtn onClick={showLastMonth}>
+          <BsChevronLeft />
+        </HeaderBtn>
 
-      <CurrentDate>{current.format("YYYY년 MM월")}</CurrentDate>
+        <CurrentDate>{current.format("YYYY년 MM월")}</CurrentDate>
 
-      <ChevronBtn onClick={showNextMonth}>
-        <BsChevronRight />
-      </ChevronBtn>
+        <HeaderBtn onClick={showNextMonth}>
+          <BsChevronRight />
+        </HeaderBtn>
+      </Nav>
+
+      <HeaderBtn onClick={props.toAdd}>
+        <FaPlus />
+        <BtnText>일정 추가하기</BtnText>
+      </HeaderBtn>
     </Header>
   );
 };
@@ -33,15 +41,24 @@ const Header = styled.div`
   ${({ theme }) => {
     const { device, colors } = theme;
     return css`
-      ${Flexbox}
+      ${flex.Flexbox}
+      position: relative;
+      justify-content: flex-end;
       height: 50px;
       border-bottom:2px solid ${colors.basicBorder};
 
       ${device.tablet} {
         height: 60px;
+        padding: 0 20px;
+
       }
     }`;
   }}
+`;
+
+const Nav = styled.div`
+  ${flex.Flexbox};
+  ${PosCenter};
 `;
 
 const HeaderStyle = css`
@@ -51,15 +68,25 @@ const HeaderStyle = css`
 `;
 
 const CurrentDate = styled.h2`
+  ${flex.Flexbox};
   ${HeaderStyle}
-  width: 120px;
+  width: 140px;
 `;
 
-const ChevronBtn = styled.button`
+const HeaderBtn = styled.button`
+  ${flex.Flexbox}
   ${HeaderStyle}
   height: 100%;
-  padding: 0 25px;
+  padding: 0 15px;
   margin: 0 10px;
+`;
+
+const BtnText = styled.span`
+  display: none;
+  ${({ theme }) => theme.device.tablet} {
+    margin-left: 5px;
+    font-size: ${({ theme }) => theme.fontSizes.md};
+  }
 `;
 
 export default CalendarHeader;
