@@ -24,17 +24,18 @@ const GlobalStyles = createGlobalStyle`
   }
 
   a {
-    color: black;
+    color: ${({ theme }) => theme.colors.white};
     text-decoration: none;
     
     &:hover {
-      color: black;
+      color: ${({ theme }) => theme.colors.white};
     }
   }
 
   button, 
   input,
   textarea {
+    color: ${({ theme }) => theme.colors.white};
     background-color: transparent;
     border: none;
     outline: none;

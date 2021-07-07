@@ -6,9 +6,21 @@ const device = {
 const colors = {
   white: "#F5F5F5",
   black: "#202020",
-  lightGray: "#cccccc",
+  lightGray: "#E0E0E0",
   red: "#eb2f06",
   blue: "#0652DD",
+};
+
+const label = {
+  darkYellow: "#FB8B24",
+  darkRed: "#9A031E",
+  darkOrange: "#E36414",
+  eagleGreen: "#0F4C5C",
+  purple: "#5F0F40",
+  sienna: "#E76F51",
+  persianGreen: "#2A9D8F",
+  rose: "#B56576",
+  violet: "#6D597A",
 };
 
 const borders = {
@@ -26,6 +38,7 @@ const fontSizes = {
 const theme = {
   device,
   colors,
+  label,
   borders,
   fontSizes,
 };
