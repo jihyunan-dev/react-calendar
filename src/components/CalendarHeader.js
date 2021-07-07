@@ -1,7 +1,9 @@
 import React from "react";
+import styled, { css } from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { actionCreators as dateActions } from "../redux/modules/date";
+import { Flexbox } from "../mixins/flexbox";
 
 const CalendarHeader = (props) => {
   const current = useSelector((state) => state.date.current);
@@ -13,18 +15,51 @@ const CalendarHeader = (props) => {
     dispatch(dateActions.setCurrent(current.clone().add(1, "month")));
 
   return (
-    <div>
-      <button onClick={showLastMonth}>
+    <Header>
+      <ChevronBtn onClick={showLastMonth}>
         <BsChevronLeft />
-      </button>
+      </ChevronBtn>
 
-      <h2>{current.format("YYYY년 MM월")}</h2>
+      <CurrentDate>{current.format("YYYY년 MM월")}</CurrentDate>
 
-      <button onClick={showNextMonth}>
+      <ChevronBtn onClick={showNextMonth}>
         <BsChevronRight />
-      </button>
-    </div>
+      </ChevronBtn>
+    </Header>
   );
 };
+
+const Header = styled.div`
+  ${({ theme }) => {
+    const { device, colors } = theme;
+    return css`
+      ${Flexbox}
+      height: 50px;
+      border-bottom:2px solid ${colors.basicBorder};
+
+      ${device.tablet} {
+        height: 60px;
+      }
+    }`;
+  }}
+`;
+
+const HeaderStyle = css`
+  color: ${({ theme }) => theme.colors.white};
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  font-weight: 600;
+`;
+
+const CurrentDate = styled.h2`
+  ${HeaderStyle}
+  width: 120px;
+`;
+
+const ChevronBtn = styled.button`
+  ${HeaderStyle}
+  height: 100%;
+  padding: 0 25px;
+  margin: 0 10px;
+`;
 
 export default CalendarHeader;
