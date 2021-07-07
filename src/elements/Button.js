@@ -52,4 +52,24 @@ const CancleBtn = styled(Link)`
   padding: 10px;
 `;
 
-export { RectangleBtn, RoundBtn, CancleBtn };
+const ModeBtn = styled.button`
+  ${({ theme }) => {
+    const { fontSizes, device } = theme;
+    return css`
+      ${flex.Flexbox};
+      ${Btn};
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      padding: 5px;
+      font-weight: 600;
+
+      ${device.tablet} {
+        padding: 5px 10px;
+        font-size: ${fontSizes.md};
+      }
+    `;
+  }}
+`;
+
+export { RectangleBtn, RoundBtn, CancleBtn, ModeBtn };
