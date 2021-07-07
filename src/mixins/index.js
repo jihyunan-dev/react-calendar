@@ -1,3 +1,4 @@
 import { flex } from "./flexbox";
+import { PosCenter } from "./posCenter";
 
-export { flex };
+export { flex, PosCenter };
