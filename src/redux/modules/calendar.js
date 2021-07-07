@@ -25,10 +25,6 @@ const checkCalendar = createAction(CHECK, (id) => ({ id }));
 
 // connect firebase
 const loadCalendarFB = () => (dispatch, getState) => {
-  const { current } = getState().date;
-  const condition = parseInt(current.clone().format("YYYY"));
-  console.log(condition);
-
   scheduleDB.get().then((docs) => {
     let schedules = [];
     docs.forEach((doc) => {
