@@ -16,10 +16,11 @@ const ScheduleBtn = styled.button`
   justify-content: flex-start;
   width: 100%;
   padding: 0 3px 2px 3px;
+  margin-bottom: 3px;
   border-radius: 5px;
   color: ${({ theme }) => theme.colors.white};
-  background-color: ${({ theme, color }) => theme.colors[color]};
-  font-weight: 500;
+  background-color: ${({ theme, color }) => theme.label[color]};
+  font-size: ${({ theme }) => theme.fontSizes.xm};
   white-space: nowrap;
   overflow: hidden;
 `;
