@@ -10,7 +10,7 @@ const ADD = "calendar/ADD";
 const TOGGLE_MODE = "calendar/TOGGLE_MODE";
 const CHECK = "calendar/CHECK";
 // const EDIT = "calendar/EDIT";
-// const DELETE = "calendar/DELETE";
+const DELETE = "calendar/DELETE";
 
 // action creator
 const loadCalendar = createAction(LOAD, (schedules) => ({ schedules }));
@@ -21,7 +21,7 @@ const checkCalendar = createAction(CHECK, (id) => ({ id }));
 //   new_schedule,
 //   id,
 // }));
-// const deleteCalendar = createActions(DELETE, (id) => ({id}))
+const deleteCalendar = createAction(DELETE, (id) => ({ id }));
 
 // connect firebase
 const loadCalendarFB = () => (dispatch, getState) => {
@@ -58,6 +58,11 @@ const checkCalendarFB = (id) => (dispatch, getState) => {
     .catch((err) => console.log(err));
 };
 
+const deleteCalendarFB = (id) => (dispatch, getState) => {
+  scheduleDB.doc(id).delete();
+  dispatch(deleteCalendar(id));
+};
+
 // initialState
 const initialState = {
   scheduleList: [],
@@ -87,6 +92,12 @@ export default handleActions(
             : schedule
         );
       }),
+    [DELETE]: (state, action) =>
+      produce(state, (draft) => {
+        draft.scheduleList = draft.scheduleList.filter(
+          (schedule) => schedule.id !== action.payload.id
+        );
+      }),
   },
   initialState
 );
@@ -96,4 +107,5 @@ export const actionCreators = {
   loadCalendarFB,
   addCalendarFB,
   checkCalendarFB,
+  deleteCalendarFB,
 };

@@ -29,6 +29,11 @@ const Modal = (props) => {
     dispatch(calendarActions.checkCalendarFB(id));
   };
 
+  const deleteSchedule = () => {
+    dispatch(calendarActions.deleteCalendarFB(id));
+    dispatch(modalActions.closeModal());
+  };
+
   return (
     <ModalContainer>
       <ModalHeader color={color} isCompleted={isCompleted} title={title} />
@@ -38,10 +43,13 @@ const Modal = (props) => {
         {memo && <Def title="메모" description={memo} />}
       </ModalBody>
       <BtnBox>
-        <ModalBtn color={color} type="button" onClick={toggleComplete}>
+        <ModalBtn type="button" onClick={toggleComplete}>
           {isCompleted ? "미완료" : "완료"}
         </ModalBtn>
-        <ModalBtn color={color} type="button" onClick={closeModal}>
+        <ModalBtn type="button" onClick={deleteSchedule}>
+          삭제
+        </ModalBtn>
+        <ModalBtn color="white" type="button" onClick={closeModal}>
           닫기
         </ModalBtn>
       </BtnBox>
@@ -70,8 +78,8 @@ const ModalBody = styled.dl`
 
 const BtnBox = styled.div`
   position: absolute;
-  top: -35px;
-  right: 0;
+  top: 10px;
+  right: 10px;
 `;
 
 const ModalBtn = styled.button`
@@ -81,12 +89,10 @@ const ModalBtn = styled.button`
       padding: 0 5px;
       font-size: ${fontSizes.md};
       font-weight: 600;
-      color: ${color ? label[color] : colors.white};
+      color: ${color ? colors[color] : colors.black};
 
       ${device.tablet} {
         padding: 0 10px;
-
-        font-size: ${fontSizes.lg};
       }
     `;
   }}
