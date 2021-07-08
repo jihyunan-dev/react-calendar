@@ -10,15 +10,17 @@ import ColorBtns from "./ColorBtns";
 
 const AddForm = (props) => {
   const { history } = props;
-
   const dispatch = useDispatch();
 
-  // ⭐반드시 리팩토링 하기
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState(moment().format("YYYY-MM-DD"));
-  const [memo, setMemo] = useState("");
-  const [location, setLocation] = useState("");
-  const [color, setColor] = useState("brick");
+  const [value, setValue] = useState({
+    color: "brick",
+    title: "",
+    date: moment().format("YYYY-MM-DD"),
+    location: "",
+    memo: "",
+  });
+
+  const { color, title, date, location, memo } = value;
 
   const handleSubmit = (e) => {
     if (!title.trim()) {
@@ -27,26 +29,27 @@ const AddForm = (props) => {
     }
 
     const schedule = {
-      title: title.trim(),
+      ...value,
       date: parseInt(date.split("-").join("")),
-      location: location.trim(),
-      memo,
-      color,
       query: parseInt(date.slice(0, 5)),
       isCompleted: false,
     };
+
     dispatch(calendarActions.addCalendarFB(schedule));
     history.replace("/");
   };
 
   return (
     <Form>
-      <ColorBtns current={color} _onClick={(e) => setColor(e.target.id)} />
+      <ColorBtns
+        current={color}
+        _onClick={(e) => setValue({ ...value, color: e.target.id })}
+      />
       <Input
         id="title"
         label="일정 제목*"
         type="text"
-        _onChange={(e) => setTitle(e.target.value)}
+        _onChange={(e) => setValue({ ...value, title: e.target.value })}
         value={title}
       />
 
@@ -54,21 +57,21 @@ const AddForm = (props) => {
         id="location"
         label="장소"
         type="text"
-        _onChange={(e) => setLocation(e.target.value)}
+        _onChange={(e) => setValue({ ...value, location: e.target.value })}
         value={location}
       />
       <Input
         id="date"
         label="날짜*"
         type="date"
-        _onChange={(e) => setDate(e.target.value)}
+        _onChange={(e) => setValue({ ...value, date: e.target.value })}
         value={date}
       />
       <Input
         id="memo"
         label="메모"
         type="textarea"
-        _onChange={(e) => setMemo(e.target.value)}
+        _onChange={(e) => setValue({ ...value, memo: e.target.value })}
         value={memo}
       />
       <BtnBox>
