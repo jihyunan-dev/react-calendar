@@ -59,6 +59,7 @@ const Header = styled.div`
 const Nav = styled.div`
   ${flex.Flexbox};
   ${PosCenter};
+  height: 100%;
 `;
 
 const HeaderStyle = css`
@@ -77,8 +78,13 @@ const HeaderBtn = styled.button`
   ${flex.Flexbox}
   ${HeaderStyle}
   height: 100%;
-  padding: 0 15px;
+  padding: 0 5px;
   margin: 0 10px;
+
+  ${({ theme }) => theme.device.tablet} {
+    padding: 0 15px;
+    margin: 0 10px;
+  }
 `;
 
 const BtnText = styled.span`
