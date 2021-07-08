@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 import { flex } from "../mixins";
 
-const Input = (props) => {
+const Input = memo((props) => {
   const { type, label, id, placeholder, value, _onChange } = props;
 
   if (type === "textarea") {
@@ -47,7 +47,7 @@ const Input = (props) => {
       />
     </InputBox>
   );
-};
+});
 
 Input.defaultProps = {
   id: Date.now(),

@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import styled, { css } from "styled-components";
 import { flex } from "../mixins";
 
-const ModalHeader = (props) => {
+const ModalHeader = memo((props) => {
   const { color, title, isCompleted } = props;
   return (
     <Header color={color}>
@@ -10,7 +10,7 @@ const ModalHeader = (props) => {
       <Title>{title}</Title>
     </Header>
   );
-};
+});
 
 ModalHeader.defaultProps = {
   color: "rose",

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 
-const Schedule = (props) => {
+const Schedule = memo((props) => {
   const { isCompleted, color, _onClick, children } = props;
 
   return (
@@ -9,7 +9,7 @@ const Schedule = (props) => {
       {isCompleted ? `(완)${children}` : `(미완)${children}`}
     </ScheduleBtn>
   );
-};
+});
 
 const ScheduleBtn = styled.button`
   display: flex;

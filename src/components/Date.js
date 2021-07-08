@@ -1,10 +1,10 @@
-import React from "react";
+import React, { memo } from "react";
 import styled, { css } from "styled-components";
 import { useDispatch } from "react-redux";
 import { Schedule } from "../elements";
 import { actionCreators as modalActions } from "../redux/modules/modal";
 
-const Date = (props) => {
+const Date = memo((props) => {
   const { list, today, thisMonth, children } = props;
   const dispatch = useDispatch();
 
@@ -31,7 +31,7 @@ const Date = (props) => {
       })}
     </DateBox>
   );
-};
+});
 
 const DateBox = styled.div`
   ${({ theme, today }) => {

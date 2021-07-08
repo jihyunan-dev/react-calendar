@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import styled, { css } from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
@@ -6,7 +6,7 @@ import { actionCreators as dateActions } from "../redux/modules/date";
 import { flex, PosCenter } from "../mixins";
 import { FaPlus } from "react-icons/fa";
 
-const CalendarHeader = (props) => {
+const CalendarHeader = memo((props) => {
   const current = useSelector((state) => state.date.current);
   const dispatch = useDispatch();
 
@@ -35,7 +35,7 @@ const CalendarHeader = (props) => {
       </HeaderBtn>
     </Header>
   );
-};
+});
 
 const Header = styled.div`
   ${({ theme }) => {

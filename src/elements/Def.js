@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import styled, { css } from "styled-components";
 import { flex } from "../mixins";
 
-const Def = (props) => {
+const Def = memo((props) => {
   const { title, description } = props;
   return (
     <DefBox>
@@ -10,7 +10,7 @@ const Def = (props) => {
       <DefDesc>{description}</DefDesc>
     </DefBox>
   );
-};
+});
 
 Def.defaultProps = {
   title: "",
