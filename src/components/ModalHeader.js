@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import styled, { css } from "styled-components";
-import { flex } from "../mixins";
+import { FlexboxColumn } from "../mixins";
 
 const ModalHeader = memo((props) => {
   const { color, title, isCompleted } = props;
@@ -17,7 +17,7 @@ ModalHeader.defaultProps = {
 };
 
 const Header = styled.div`
-  ${flex.FlexBoxColumn};
+  ${FlexboxColumn};
   justify-content: center;
   height: 30%;
   background-color: ${({ color, theme }) => theme.label[color]};

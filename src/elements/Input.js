@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import styled from "styled-components";
-import { flex } from "../mixins";
+import { FlexboxColumn } from "../mixins";
 
 const Input = memo((props) => {
   const { type, label, id, placeholder, value, _onChange } = props;
@@ -57,7 +57,7 @@ Input.defaultProps = {
 };
 
 const InputBox = styled.div`
-  ${flex.FlexBoxColumn}
+  ${FlexboxColumn}
   margin-bottom: 30px;
 
   &:focus {

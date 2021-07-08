@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { flex } from "../mixins";
+import { Flexbox } from "../mixins";
 import theme from "../shared/theme";
 
 const ColorBtns = (props) => {
@@ -25,7 +25,7 @@ const ColorBtns = (props) => {
 };
 
 const Container = styled.div`
-  ${flex.Flexbox}
+  ${Flexbox}
   justify-content: flex-start;
   gap: 10px;
   flex-wrap: wrap;

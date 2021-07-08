@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { actionCreators as dateActions } from "../redux/modules/date";
-import { flex, PosCenter } from "../mixins";
+import { Flexbox, PosCenter } from "../mixins";
 import { FaPlus } from "react-icons/fa";
 
 const CalendarHeader = memo((props) => {
@@ -41,7 +41,7 @@ const Header = styled.div`
   ${({ theme }) => {
     const { device, colors } = theme;
     return css`
-      ${flex.Flexbox}
+      ${Flexbox}
       position: relative;
       justify-content: flex-end;
       height: 50px;
@@ -57,7 +57,7 @@ const Header = styled.div`
 `;
 
 const Nav = styled.div`
-  ${flex.Flexbox};
+  ${Flexbox};
   ${PosCenter};
   height: 100%;
 `;
@@ -69,13 +69,13 @@ const HeaderStyle = css`
 `;
 
 const CurrentDate = styled.h2`
-  ${flex.Flexbox};
+  ${Flexbox};
   ${HeaderStyle}
   width: 140px;
 `;
 
 const HeaderBtn = styled.button`
-  ${flex.Flexbox}
+  ${Flexbox}
   ${HeaderStyle}
   height: 100%;
   padding: 0 5px;

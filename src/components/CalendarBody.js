@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 
 import useRenderDate from "../hooks/useRenderDate";
-import { flex } from "../mixins";
+import { Flexbox } from "../mixins";
 import { actionCreators as calendarActions } from "../redux/modules/calendar";
 import { ModeBtn } from "../elements";
 
@@ -72,7 +72,7 @@ const DayBox = styled.div`
   ${({ theme }) => {
     const { device, fontSizes } = theme;
     return css`
-      ${flex.Flexbox}
+      ${Flexbox}
       height: 30px;
 
       font-size: ${fontSizes.sm};

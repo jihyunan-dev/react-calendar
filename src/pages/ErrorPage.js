@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { RectangleBtn } from "../elements";
-import { flex } from "../mixins";
+import { FlexboxColumn } from "../mixins";
 
 const ErrorPage = (props) => {
   return (
@@ -15,7 +15,7 @@ const ErrorPage = (props) => {
 };
 
 const Container = styled.div`
-  ${flex.FlexBoxColumn};
+  ${FlexboxColumn};
   align-items: center;
   width: 90%;
   height: 100vh;

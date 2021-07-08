@@ -1,4 +1,4 @@
-import { flex } from "./flexbox";
+import { Flexbox, FlexboxColumn } from "./flexbox";
 import { PosCenter } from "./posCenter";
 
-export { flex, PosCenter };
+export { Flexbox, FlexboxColumn, PosCenter };

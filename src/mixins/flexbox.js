@@ -6,13 +6,10 @@ const Flexbox = css`
   align-items: center;
 `;
 
-const FlexBoxColumn = css`
+const FlexboxColumn = css`
   display: flex;
   flex-direction: column;
   justify-content: center;
 `;
 
-export const flex = {
-  Flexbox,
-  FlexBoxColumn,
-};
+export { Flexbox, FlexboxColumn };

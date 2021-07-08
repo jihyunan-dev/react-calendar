@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { flex } from "../mixins";
+import { Flexbox } from "../mixins";
 
 // 공통 스타일
 const Btn = css`
   ${({ theme }) => {
     const { colors } = theme;
     return css`
-      ${flex.Flexbox};
+      ${Flexbox};
       color: ${colors.black};
       background-color: ${colors.white};
       transition: background-color 200ms ease-in-out;
@@ -42,7 +42,7 @@ const ModeBtn = styled.button`
   ${({ theme }) => {
     const { fontSizes, device } = theme;
     return css`
-      ${flex.Flexbox};
+      ${Flexbox};
       ${Btn};
       position: absolute;
       bottom: 10px;

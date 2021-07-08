@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 
 import { actionCreators as calendarActions } from "../redux/modules/calendar";
 import { Input, RectangleBtn, CancleBtn } from "../elements";
-import { flex } from "../mixins";
+import { Flexbox } from "../mixins";
 import ColorBtns from "./ColorBtns";
 
 const AddForm = (props) => {
@@ -30,6 +30,7 @@ const AddForm = (props) => {
 
     const schedule = {
       ...value,
+      memo,
       date: parseInt(date.split("-").join("")),
       query: parseInt(date.slice(0, 5)),
       isCompleted: false,
@@ -90,7 +91,7 @@ const Form = styled.form`
 `;
 
 const BtnBox = styled.div`
-  ${flex.Flexbox};
+  ${Flexbox};
   justify-content: flex-end;
   gap: 20px;
 `;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { flex } from "../mixins";
+import { FlexboxColumn } from "../mixins";
 import AddForm from "../components/AddForm";
 
 const Add = (props) => {
@@ -13,7 +13,7 @@ const Add = (props) => {
 };
 
 const Container = styled.section`
-  ${flex.FlexBoxColumn};
+  ${FlexboxColumn};
   position: fixed;
   top: 50%;
   left: 50%;
