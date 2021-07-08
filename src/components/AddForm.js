@@ -21,10 +21,15 @@ const AddForm = (props) => {
   const [color, setColor] = useState("brick");
 
   const handleSubmit = (e) => {
+    if (!title.trim()) {
+      alert("제목 혹은 날짜를 확인해주세요.");
+      return;
+    }
+
     const schedule = {
-      title,
+      title: title.trim(),
       date: parseInt(date.split("-").join("")),
-      location,
+      location: location.trim(),
       memo,
       color,
       query: parseInt(date.slice(0, 5)),
