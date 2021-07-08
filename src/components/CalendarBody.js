@@ -1,55 +1,26 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+
+import useRenderDate from "../hooks/useRenderDate";
 import { flex } from "../mixins";
-import Date from "./Date";
-
 import { actionCreators as calendarActions } from "../redux/modules/calendar";
-
 import { ModeBtn } from "../elements";
 
 const CalendarBody = (props) => {
   const dispatch = useDispatch();
-
   const mode = useSelector((state) => state.calendar.mode);
+
   const { now, current } = useSelector((state) => state.date);
-  const nowFormat = now.clone().format("YYYYMMDD");
-  const schedules = useSelector((state) => state.calendar.scheduleList) || [];
 
   const firstDay = current.clone().startOf("month");
   const startDate = firstDay.clone().subtract("day", firstDay.day());
 
   const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+  const dates = useRenderDate(startDate, now);
 
   const clickButton = () => {
     dispatch(calendarActions.toggleMode());
-  };
-
-  const renderDate = () => {
-    return (
-      <>
-        {[...Array(42)].map((n, idx) => {
-          let target = startDate.clone().add(idx, "d");
-          let today = target.clone().format("YYYYMMDD") === nowFormat;
-          let targetList =
-            mode === "all"
-              ? schedules.filter(
-                  (schedule) =>
-                    schedule.date === parseInt(target.format("YYYYMMDD"))
-                )
-              : schedules.filter(
-                  (schedule) =>
-                    schedule.date === parseInt(target.format("YYYYMMDD")) &&
-                    schedule.isCompleted === true
-                );
-          return (
-            <Date key={idx} list={targetList} today={today}>
-              {target.format("D")}
-            </Date>
-          );
-        })}
-      </>
-    );
   };
 
   return (
@@ -59,7 +30,7 @@ const CalendarBody = (props) => {
           <DayBox key={idx}>{day}</DayBox>
         ))}
       </CalendarDays>
-      <CalendarDate>{renderDate()}</CalendarDate>
+      <CalendarDate>{dates}</CalendarDate>
 
       <ModeBtn type="button" onClick={clickButton}>
         {mode === "all" ? "완료 일정 보기" : "모든 일정 보기"}
