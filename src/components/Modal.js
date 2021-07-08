@@ -1,8 +1,11 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as modalActions } from "../redux/modules/modal";
 import { actionCreators as calendarActions } from "../redux/modules/calendar";
+
+import ModalHeader from "./ModalHeader";
+import { Def } from "../elements";
 
 const Modal = (props) => {
   const dispatch = useDispatch();
@@ -12,7 +15,7 @@ const Modal = (props) => {
     state.calendar.scheduleList.find((schedule) => schedule.id === currentId)
   );
 
-  const { title, memo, location, date, isCompleted, isImportant, id } = data;
+  const { title, memo, location, date, isCompleted, color, id } = data;
 
   const year = String(date).slice(0, 4);
   const month = String(date).slice(4, 6);
@@ -28,46 +31,65 @@ const Modal = (props) => {
 
   return (
     <ModalContainer>
-      <div>
-        <strong>{isImportant ? "중요" : null}</strong>
-        <span>{isCompleted ? "완료" : "미완료"}</span>
-      </div>
-      <dl>
-        <div>
-          <dt>일정 제목</dt>
-          <dd>{title}</dd>
-        </div>
-        <div>
-          <dt>장소</dt>
-          <dd>{location}</dd>
-        </div>
-        <div>
-          <dt>날짜</dt>
-          <dd>{`${year}년 ${month}월 ${day}일`}</dd>
-        </div>
-        <div>
-          <dt>메모</dt>
-          <dd>{memo}</dd>
-        </div>
-      </dl>
-      <button type="button" onClick={toggleComplete}>
-        {isCompleted ? "미완료" : "완료"}
-      </button>
-      <button type="button" onClick={closeModal}>
-        닫기
-      </button>
+      <ModalHeader color={color} isCompleted={isCompleted} title={title} />
+      <ModalBody>
+        {location && <Def title="장소" description={location} />}
+        <Def title="날짜" description={`${year}년 ${month}월 ${day}일`} />
+        {memo && <Def title="메모" description={memo} />}
+      </ModalBody>
+      <BtnBox>
+        <ModalBtn color={color} type="button" onClick={toggleComplete}>
+          {isCompleted ? "미완료" : "완료"}
+        </ModalBtn>
+        <ModalBtn color={color} type="button" onClick={closeModal}>
+          닫기
+        </ModalBtn>
+      </BtnBox>
     </ModalContainer>
   );
 };
 
 const ModalContainer = styled.div`
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 80vw;
-  height: 50vh;
-  background-color: orange;
+  width: 80%;
+  height: 80%;
+  max-width: 600px;
+  max-height: 450px;
+  border: 2px solid ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.black};
+  z-index: 20;
+`;
+
+const ModalBody = styled.dl`
+  height: 70%;
+  padding: 20px;
+`;
+
+const BtnBox = styled.div`
+  position: absolute;
+  top: -35px;
+  right: 0;
+`;
+
+const ModalBtn = styled.button`
+  ${({ color, theme }) => {
+    const { device, colors, fontSizes, label } = theme;
+    return css`
+      padding: 0 5px;
+      font-size: ${fontSizes.md};
+      font-weight: 600;
+      color: ${color ? label[color] : colors.white};
+
+      ${device.tablet} {
+        padding: 0 10px;
+
+        font-size: ${fontSizes.lg};
+      }
+    `;
+  }}
 `;
 
 export default Modal;
