@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Date from "../components/Date";
 
-const useRenderDate = (start, now) => {
+const useRenderDate = (start, now, current) => {
   const mode = useSelector((state) => state.calendar.mode);
   const schedules = useSelector((state) => state.calendar.scheduleList) || [];
   const nowFormat = now.clone().format("YYYYMMDD");
@@ -11,6 +11,8 @@ const useRenderDate = (start, now) => {
       {[...Array(42)].map((n, idx) => {
         let target = start.clone().add(idx, "d");
         let today = target.clone().format("YYYYMMDD") === nowFormat;
+        let thisMonth =
+          target.clone().format("YYYYMM") === current.clone().format("YYYYMM");
         let targetList =
           mode === "all"
             ? schedules.filter(
@@ -23,7 +25,7 @@ const useRenderDate = (start, now) => {
                   schedule.isCompleted === true
               );
         return (
-          <Date key={idx} list={targetList} today={today}>
+          <Date key={idx} list={targetList} today={today} thisMonth={thisMonth}>
             {target.format("D")}
           </Date>
         );

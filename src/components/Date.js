@@ -5,7 +5,7 @@ import { Schedule } from "../elements";
 import { actionCreators as modalActions } from "../redux/modules/modal";
 
 const Date = (props) => {
-  const { list, today, children } = props;
+  const { list, today, thisMonth, children } = props;
   const dispatch = useDispatch();
 
   const showModal = (id) => {
@@ -14,7 +14,9 @@ const Date = (props) => {
 
   return (
     <DateBox today={today}>
-      <DateNum today={today}>{children}</DateNum>
+      <DateNum today={today} thisMonth={thisMonth}>
+        {children}
+      </DateNum>
       {list.map((item) => {
         return (
           <Schedule
@@ -42,7 +44,7 @@ const DateBox = styled.div`
 `;
 
 const DateNum = styled.p`
-  ${({ theme, today }) => {
+  ${({ theme, today, thisMonth }) => {
     const { colors, fontSizes } = theme;
     return css`
       width: 100%;
@@ -50,6 +52,7 @@ const DateNum = styled.p`
       font-size: ${fontSizes.sm};
       font-weight: 600;
       color: ${today === true ? colors.black : colors.white};
+      opacity: ${thisMonth ? "100%" : "50%"};
     `;
   }}
 `;

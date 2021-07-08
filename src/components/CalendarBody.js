@@ -17,7 +17,7 @@ const CalendarBody = (props) => {
   const startDate = firstDay.clone().subtract("day", firstDay.day());
 
   const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-  const dates = useRenderDate(startDate, now);
+  const dates = useRenderDate(startDate, now, current);
 
   const clickButton = () => {
     dispatch(calendarActions.toggleMode());
