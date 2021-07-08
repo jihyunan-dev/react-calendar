@@ -10,7 +10,7 @@ const OverlayBox = styled.div`
   width: 100%;
   height: 100vh;
   background-color: ${({ theme }) => theme.colors.black};
-  opacity: 70%;
+  opacity: 90%;
   z-index: 10;
 `;
 
