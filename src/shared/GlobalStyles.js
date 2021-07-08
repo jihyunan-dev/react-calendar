@@ -41,6 +41,13 @@ const GlobalStyles = createGlobalStyle`
     outline: none;
   }
 
+  input[type="date"]::-webkit-calendar-picker-indicator {
+  color: transparent;
+  background: none;
+  z-index: 1;
+}
+
+
   textarea {
     resize: none;
   }

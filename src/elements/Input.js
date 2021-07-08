@@ -18,6 +18,23 @@ const Input = (props) => {
     );
   }
 
+  if (type === "date") {
+    return (
+      <InputBox>
+        <CustomLabel htmlFor={id}>{label}</CustomLabel>
+        <CustomInput
+          type="date"
+          id={id}
+          onChange={_onChange}
+          value={value}
+          placeholder={placeholder}
+          min="2000-01-01"
+          max="2100-12-31"
+        />
+      </InputBox>
+    );
+  }
+
   return (
     <InputBox>
       <CustomLabel htmlFor={id}>{label}</CustomLabel>
