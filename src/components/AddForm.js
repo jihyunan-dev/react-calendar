@@ -31,7 +31,7 @@ const AddForm = (props) => {
       isCompleted: false,
     };
     dispatch(calendarActions.addCalendarFB(schedule));
-    history.push("/");
+    history.replace("/");
   };
   return (
     <Form>

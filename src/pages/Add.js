@@ -7,7 +7,7 @@ import AddForm from "../components/AddForm";
 const Add = (props) => {
   return (
     <Container>
-      <AddForm />
+      <AddForm history={props.history} />
     </Container>
   );
 };
