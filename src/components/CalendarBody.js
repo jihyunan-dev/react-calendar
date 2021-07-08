@@ -116,7 +116,11 @@ const DayBox = styled.div`
 
 const CalendarDate = styled.div`
   ${CalendarGrid};
-  grid-template-rows: repeat(6, minmax(70px, 100px));
+  grid-template-rows: repeat(6, calc((100vh - 90px) / 6));
+
+  ${({ theme }) => theme.device.tablet} {
+    grid-template-rows: repeat(6, calc((100vh - 100px) / 6));
+  }
 `;
 
 export default CalendarBody;

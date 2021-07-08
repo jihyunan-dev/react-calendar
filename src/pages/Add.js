@@ -14,9 +14,14 @@ const Add = (props) => {
 
 const Container = styled.section`
   ${flex.FlexBoxColumn};
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  min-width: 320px;
   max-width: 500px;
-  margin: 50px auto;
   padding: 0 30px;
+  transform: translate(-50%, -50%);
 `;
 
 export default Add;

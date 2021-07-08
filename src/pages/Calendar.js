@@ -22,7 +22,11 @@ const Calendar = (props) => {
 };
 
 const Container = styled.section`
-  position: relative;
+  position: fixed;
+  top: 50%;
+  width: 100%;
+  max-height: 100vh;
+  transform: translate(0, -50%);
 `;
 
 export default Calendar;

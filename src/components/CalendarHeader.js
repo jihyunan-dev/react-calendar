@@ -83,8 +83,11 @@ const HeaderBtn = styled.button`
 
 const BtnText = styled.span`
   display: none;
+
   ${({ theme }) => theme.device.tablet} {
+    display: block;
     margin-left: 5px;
+    margin-bottom: 3px;
     font-size: ${({ theme }) => theme.fontSizes.md};
   }
 `;
