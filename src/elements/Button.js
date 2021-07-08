@@ -33,20 +33,6 @@ const RectangleBtn = styled.button`
   }}
 `;
 
-const RoundBtn = styled.button`
-  ${Btn};
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-size: 20px;
-
-  ${({ theme }) => theme.device.tablet} {
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
-  }
-`;
-
 const CancleBtn = styled(Link)`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   padding: 10px;
@@ -72,4 +58,4 @@ const ModeBtn = styled.button`
   }}
 `;
 
-export { RectangleBtn, RoundBtn, CancleBtn, ModeBtn };
+export { RectangleBtn, CancleBtn, ModeBtn };
