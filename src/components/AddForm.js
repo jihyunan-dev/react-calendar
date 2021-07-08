@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { actionCreators as calendarActions } from "../redux/modules/calendar";
 import { Input, RectangleBtn, CancleBtn } from "../elements";
 import { flex } from "../mixins";
+import ColorBtns from "./ColorBtns";
 
 const AddForm = (props) => {
   const { history } = props;
@@ -17,8 +18,7 @@ const AddForm = (props) => {
   const [date, setDate] = useState(moment().format("YYYY-MM-DD"));
   const [memo, setMemo] = useState("");
   const [location, setLocation] = useState("");
-  // color는 나중에 버튼으로 추가 예정
-  const [color, setColor] = useState("red");
+  const [color, setColor] = useState("brick");
 
   const handleSubmit = (e) => {
     const schedule = {
@@ -33,8 +33,10 @@ const AddForm = (props) => {
     dispatch(calendarActions.addCalendarFB(schedule));
     history.replace("/");
   };
+
   return (
     <Form>
+      <ColorBtns current={color} _onClick={(e) => setColor(e.target.id)} />
       <Input
         id="title"
         label="일정 제목*"

@@ -12,15 +12,17 @@ const colors = {
 };
 
 const label = {
-  darkYellow: "#FB8B24",
+  brick: "#c8553d",
   darkRed: "#9A031E",
+  darkYellow: "#FB8B24",
   darkOrange: "#E36414",
-  eagleGreen: "#0F4C5C",
-  purple: "#5F0F40",
-  sienna: "#E76F51",
   persianGreen: "#2A9D8F",
+  green: "#008000",
+  eagleGreen: "#0F4C5C",
+  // midNightBlue: "#145DA0",
   rose: "#B56576",
   violet: "#6D597A",
+  // purple: "#5F0F40",
 };
 
 const borders = {
