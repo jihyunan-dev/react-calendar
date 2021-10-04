@@ -1,15 +1,22 @@
+// CalendarBody : 캘린더의 날짜부분
+
 import React from "react";
 import styled, { css } from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 
+// components & elements
 import useRenderDate from "../hooks/useRenderDate";
-import { Flexbox } from "../mixins";
-import { actionCreators as calendarActions } from "../redux/modules/calendar";
 import { ModeBtn } from "../elements";
+
+// style
+import { Flexbox } from "../mixins";
+
+// redux
+import { actionCreators as calendarActions } from "../redux/modules/calendar";
 
 const CalendarBody = (props) => {
   const dispatch = useDispatch();
-  const mode = useSelector((state) => state.calendar.mode);
+  const mode = useSelector((state) => state.calendar.mode); // 완료 일정 보기(completed) / 모든 일정 보기(all)를 의미
 
   const { now, current } = useSelector((state) => state.date);
 
@@ -19,7 +26,8 @@ const CalendarBody = (props) => {
   const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   const dates = useRenderDate(startDate, now, current);
 
-  const clickButton = () => {
+  // 모드 변경
+  const toggleMode = () => {
     dispatch(calendarActions.toggleMode());
   };
 
@@ -27,12 +35,13 @@ const CalendarBody = (props) => {
     <Container>
       <CalendarDays>
         {days.map((day, idx) => (
+          // 요일 렌더
           <DayBox key={idx}>{day}</DayBox>
         ))}
       </CalendarDays>
       <CalendarDate>{dates}</CalendarDate>
 
-      <ModeBtn type="button" onClick={clickButton}>
+      <ModeBtn type="button" onClick={toggleMode}>
         {mode === "all" ? "완료 일정 보기" : "모든 일정 보기"}
       </ModeBtn>
     </Container>

@@ -1,17 +1,24 @@
+// CalendarHeader : 캘린더의 헤더부분. 현재 보이는 월, 좌우 월 이동, 일정 추가 버튼
+
 import React, { memo } from "react";
 import styled, { css } from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
-import { actionCreators as dateActions } from "../redux/modules/date";
-import { Flexbox, PosCenter } from "../mixins";
 import { FaPlus } from "react-icons/fa";
 
+import { actionCreators as dateActions } from "../redux/modules/date";
+import { Flexbox, PosCenter } from "../mixins";
+
 const CalendarHeader = memo((props) => {
-  const current = useSelector((state) => state.date.current);
   const dispatch = useDispatch();
 
+  const current = useSelector((state) => state.date.current);
+
+  // 지난 달로 이동
   const showLastMonth = () =>
     dispatch(dateActions.setCurrent(current.clone().subtract(1, "month")));
+
+  // 다음 달로 이동
   const showNextMonth = () =>
     dispatch(dateActions.setCurrent(current.clone().add(1, "month")));
 

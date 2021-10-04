@@ -5,6 +5,7 @@ import Calendar from "./modules/calendar";
 import Date from "./modules/date";
 import Modal from "./modules/modal";
 
+// rootReducer
 const rootReducer = combineReducers({
   calendar: Calendar,
   date: Date,
@@ -29,6 +30,7 @@ const composeEnhancers =
 
 const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
+// store 생성
 const store = createStore(rootReducer, enhancer);
 
 export default store;

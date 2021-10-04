@@ -1,37 +1,43 @@
+// AddForm : 스케줄 추가하는 form 컴포넌트
+
 import React, { useState } from "react";
 import styled from "styled-components";
-import moment from "moment";
 import { useDispatch } from "react-redux";
+import moment from "moment";
 
 import { actionCreators as calendarActions } from "../redux/modules/calendar";
 import { Input, RectangleBtn, CancleBtn } from "../elements";
-import { Flexbox } from "../mixins";
 import ColorBtns from "./ColorBtns";
+
+import { Flexbox } from "../mixins";
 
 const AddForm = (props) => {
   const { history } = props;
   const dispatch = useDispatch();
 
   const [value, setValue] = useState({
-    color: "brick",
+    color: "brick", // 기본 색상
     title: "",
-    date: moment().format("YYYY-MM-DD"),
+    date: moment().format("YYYY-MM-DD"), // 오늘 날짜로 기본 설정(변경 가능)
     location: "",
     memo: "",
   });
 
   const { color, title, date, location, memo } = value;
 
+  // 폼 제출 함수
   const handleSubmit = (e) => {
+    // title이 빈 경우 제출 불가
     if (!title.trim()) {
       alert("제목 혹은 날짜를 확인해주세요.");
       return;
     }
 
+    // firebase에 저장하기 위한 데이터 객체
     const schedule = {
       ...value,
       memo,
-      date: parseInt(date.split("-").join("")),
+      date: parseInt(date.split("-").join("")), // 형태를 변경하여 저장
       query: parseInt(date.slice(0, 5)),
       isCompleted: false,
     };

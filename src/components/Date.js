@@ -1,11 +1,14 @@
+// Date : 날짜 한 칸 한 칸을 의미
+
 import React, { memo } from "react";
 import styled, { css } from "styled-components";
 import { useDispatch } from "react-redux";
+
 import { Schedule } from "../elements";
 import { actionCreators as modalActions } from "../redux/modules/modal";
 
 const Date = memo((props) => {
-  const { list, today, thisMonth, children } = props;
+  const { list, today, thisMonth, children } = props; // list는 해당 date의 scheduleList을 의미
   const dispatch = useDispatch();
 
   const showModal = (id) => {
@@ -23,7 +26,7 @@ const Date = memo((props) => {
             key={item.id}
             isCompleted={item.isCompleted}
             color={item.color}
-            _onClick={() => showModal(item.id)}
+            _onClick={() => showModal(item.id)} // 클릭 시 해당 스케줄 정보가 담긴 모달이 보여짐
           >
             {item.title}
           </Schedule>

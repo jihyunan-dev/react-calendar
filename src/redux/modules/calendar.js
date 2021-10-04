@@ -2,6 +2,7 @@ import { createAction, handleActions } from "redux-actions";
 import produce from "immer";
 import { firestore } from "../../shared/firebase";
 
+// connect firebase
 const scheduleDB = firestore.collection("schedules");
 
 // action type
@@ -9,7 +10,6 @@ const LOAD = "calendar/LOAD";
 const ADD = "calendar/ADD";
 const TOGGLE_MODE = "calendar/TOGGLE_MODE";
 const CHECK = "calendar/CHECK";
-// const EDIT = "calendar/EDIT";
 const DELETE = "calendar/DELETE";
 
 // action creator
@@ -17,13 +17,10 @@ const loadCalendar = createAction(LOAD, (schedules) => ({ schedules }));
 const addCalendar = createAction(ADD, (schedule) => ({ schedule }));
 const toggleMode = createAction(TOGGLE_MODE);
 const checkCalendar = createAction(CHECK, (id) => ({ id }));
-// const EditCalendar = createAction(EDIT, (new_schedule, id) => ({
-//   new_schedule,
-//   id,
-// }));
 const deleteCalendar = createAction(DELETE, (id) => ({ id }));
 
-// connect firebase
+// thunk creator
+// loadCalendarFB : firebase에서 기존 스케줄 불러오기
 const loadCalendarFB = () => (dispatch, getState) => {
   scheduleDB.get().then((docs) => {
     let schedules = [];
@@ -36,6 +33,7 @@ const loadCalendarFB = () => (dispatch, getState) => {
   });
 };
 
+// addCalendarFB : firebase에 스케줄 추가
 const addCalendarFB = (schedule) => (dispatch, getState) => {
   scheduleDB
     .add({ ...schedule })
@@ -46,6 +44,7 @@ const addCalendarFB = (schedule) => (dispatch, getState) => {
     .catch((err) => console.log(err));
 };
 
+// checkCalendarFB : firebase에 스케줄 완료/미완료 토글
 const checkCalendarFB = (id) => (dispatch, getState) => {
   const data = getState().calendar.scheduleList.find(
     (schedule) => schedule.id === id
@@ -58,6 +57,7 @@ const checkCalendarFB = (id) => (dispatch, getState) => {
     .catch((err) => console.log(err));
 };
 
+// deleteCalendarFB : firebase에서 스케줄 삭제
 const deleteCalendarFB = (id) => (dispatch, getState) => {
   scheduleDB.doc(id).delete();
   dispatch(deleteCalendar(id));

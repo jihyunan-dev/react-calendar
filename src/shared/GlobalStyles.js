@@ -20,7 +20,6 @@ const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.colors.white};
     background-color: ${({ theme }) => theme.colors.black};
     font-family: 'EliceDigitalBaeum_Regular', Arial, Helvetica, sans-serif;
-
   }
 
   a {

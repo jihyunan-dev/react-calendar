@@ -20,7 +20,8 @@ const Header = styled.div`
   ${FlexboxColumn};
   justify-content: center;
   height: 30%;
-  background-color: ${({ color, theme }) => theme.label[color]};
+  background-color: ${({ color, theme }) =>
+    theme.label[color]}; // 스케줄 추가 시 선택한 색상을 계속 사용
   padding: 20px;
 `;
 

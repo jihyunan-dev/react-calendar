@@ -1,3 +1,5 @@
+// Modal : 스케줄 클릭 시 해당 스케줄에 대한 자세한 정보를 보여주는 모달 컴포넌트
+
 import React from "react";
 import styled, { css } from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
@@ -17,6 +19,7 @@ const Modal = (props) => {
 
   const { title, memo, location, date, isCompleted, color, id } = data;
 
+  // 날짜의 형태가 20210607과 같은 형태이므로 slice로 잘라서 사용
   const year = String(date).slice(0, 4);
   const month = String(date).slice(4, 6);
   const day = String(date).slice(6, 8);
@@ -84,7 +87,7 @@ const BtnBox = styled.div`
 
 const ModalBtn = styled.button`
   ${({ color, theme }) => {
-    const { device, colors, fontSizes, label } = theme;
+    const { device, colors, fontSizes } = theme;
     return css`
       padding: 0 5px;
       font-size: ${fontSizes.md};

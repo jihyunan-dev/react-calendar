@@ -1,12 +1,14 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { useDispatch } from "react-redux";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
-import { ThemeProvider } from "styled-components";
 import { actionCreators as calendarActions } from "../redux/modules/calendar";
 
+// components
 import GlobalStyles from "./GlobalStyles";
 import theme from "./theme";
+
+// page
 import Calendar from "../pages/Calendar";
 import Add from "../pages/Add";
 import ErrorPage from "../pages/ErrorPage";

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Overlay = () => {
-  return <OverlayBox></OverlayBox>;
+  return <OverlayBox />;
 };
 
 const OverlayBox = styled.div`

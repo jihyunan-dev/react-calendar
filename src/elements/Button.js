@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
 import { Flexbox } from "../mixins";
 
-// 공통 스타일
+// 버튼 공통 스타일
 const Btn = css`
   ${({ theme }) => {
     const { colors } = theme;

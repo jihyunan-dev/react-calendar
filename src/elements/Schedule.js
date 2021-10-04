@@ -1,3 +1,5 @@
+// Schedule : 캘린더의 스케줄 버튼 하나
+
 import React, { memo } from "react";
 import styled from "styled-components";
 
